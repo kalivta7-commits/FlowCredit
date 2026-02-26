@@ -43,7 +43,8 @@
       const animations = localStorage.getItem(this.keys.animations);
       const bg = localStorage.getItem(this.keys.bg);
 
-      if (theme === 'light') document.documentElement.classList.add('light-theme');
+      if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+      if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
 
       if (animations === 'disabled') {
         document.documentElement.classList.add('animations-disabled');
@@ -56,8 +57,11 @@
     },
 
     toggleTheme() {
-      const isLight = document.documentElement.classList.toggle('light-theme');
-      localStorage.setItem(this.keys.theme, isLight ? 'light' : 'dark');
+      const currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem(this.keys.theme, newTheme);
+      localStorage.setItem('theme', newTheme);
     },
 
     toggleAnimations() {
@@ -71,9 +75,11 @@
     },
 
     reset() {
-      document.documentElement.classList.remove('light-theme', 'animations-disabled', 'bg-disabled');
+      document.documentElement.removeAttribute('data-theme');
+      document.documentElement.classList.remove('animations-disabled', 'bg-disabled');
       state.isAnimationsDisabled = false;
       localStorage.removeItem(this.keys.theme);
+      localStorage.removeItem('theme');
       localStorage.removeItem(this.keys.animations);
       localStorage.removeItem(this.keys.bg);
     }
@@ -440,7 +446,6 @@
         }
 
         // Theme / Preferences
-        if (id === 'themeToggle') { modules.Preferences.toggleTheme(); return; }
         if (id === 'toggleAnimations') { modules.Preferences.toggleAnimations(); return; }
         if (id === 'toggleBackgroundEffects') { modules.Preferences.toggleBg(); return; }
         if (id === 'resetPreferences') { modules.Preferences.reset(); return; }
@@ -497,3 +502,33 @@
   });
 
 })();
+
+const toggleBtn = document.getElementById("themeToggle");
+const icon = document.getElementById("themeIcon");
+
+// Load saved theme
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+  document.documentElement.setAttribute("data-theme", savedTheme);
+  icon.textContent = savedTheme === "dark" ? "🌙" : "☀️";
+}
+
+toggleBtn.addEventListener("click", () => {
+  const currentTheme =
+    document.documentElement.getAttribute("data-theme") === "dark"
+      ? "dark"
+      : "light";
+
+  const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+  document.documentElement.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+
+  icon.textContent = newTheme === "dark" ? "🌙" : "☀️";
+
+  toggleBtn.classList.add("rotate");
+
+  setTimeout(() => {
+    toggleBtn.classList.remove("rotate");
+  }, 400);
+});
