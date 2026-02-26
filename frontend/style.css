@@ -1,3 +1,32 @@
+/* ===== THEME TOKENS ===== */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --card-bg: #f5f5f5;
+  --accent-color: #2563eb;
+  --muted-text: #475569;
+  --soft-text: #64748b;
+  --nav-bg: rgba(255, 255, 255, 0.75);
+  --panel-bg: #f8fafc;
+  --input-bg: #ffffff;
+  --border-soft: rgba(15, 23, 42, 0.12);
+  --shadow-strong: rgba(15, 23, 42, 0.12);
+}
+
+[data-theme="dark"] {
+  --bg-color: #0f172a;
+  --text-color: #f8fafc;
+  --card-bg: #1e293b;
+  --accent-color: #3b82f6;
+  --muted-text: #94a3b8;
+  --soft-text: #64748b;
+  --nav-bg: rgba(15, 23, 42, 0.78);
+  --panel-bg: #111c32;
+  --input-bg: #0f1a2d;
+  --border-soft: rgba(148, 163, 184, 0.25);
+  --shadow-strong: rgba(2, 6, 23, 0.45);
+}
+
 /* ===== RESET & BASE ===== */
 * {
   margin: 0;
@@ -7,8 +36,9 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #070C18;  /* fallback, overridden by animated background */
-  color: #EAF0F8;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
   line-height: 1.5;
   min-height: 100vh;
   position: relative;
@@ -66,6 +96,11 @@ a {
   padding: 0 24px;
 }
 
+
+.card, .container, .box {
+  background-color: var(--card-bg);
+}
+
 /* ===== NAVBAR ===== */
 .navbar {
   position: fixed;
@@ -73,10 +108,10 @@ a {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(7, 12, 24, 0.75);
+  background: var(--nav-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid var(--border-soft);
 }
 
 .nav-container {
@@ -95,7 +130,7 @@ a {
   font-size: 1.3rem;
   letter-spacing: 0.3px;
   /* Flow color (normal) – set base color, then gradient only for second part */
-  color: #EAF0F8;
+  color: var(--text-color);
   background: linear-gradient(135deg, #3B82F6, #2563EB);
   -webkit-background-clip: text;
   background-clip: text;
@@ -107,6 +142,7 @@ a {
      possible without changing markup.) */
   color: transparent;
 }
+
 /* Alternative: remove the transparent and keep base color? We'll keep gradient
    for entire logo to meet "Credit gradient" visually, but "Flow" also gets gradient.
    For strict split, modify HTML. */
@@ -121,12 +157,12 @@ a {
 .desktop-menu a {
   font-weight: 500;
   font-size: 0.95rem;
-  color: #94A3B8;
+  color: var(--muted-text);
   transition: color 0.2s;
 }
 
 .desktop-menu a:hover {
-  color: #EAF0F8;
+  color: var(--text-color);
 }
 
 /* Nav actions */
@@ -141,14 +177,14 @@ a {
   border: none;
   font-size: 1.4rem;
   cursor: pointer;
-  color: #94A3B8;
+  color: var(--muted-text);
   transition: color 0.2s, transform 0.2s;
   line-height: 1;
   padding: 6px;
 }
 
 .icon-btn:hover {
-  color: #EAF0F8;
+  color: var(--text-color);
   transform: scale(1.05);
 }
 
@@ -159,7 +195,7 @@ a {
   padding: 10px 20px;
   font-weight: 600;
   font-size: 0.95rem;
-  color: #fff;
+  color: var(--text-color);
   cursor: pointer;
   box-shadow: 0 10px 25px rgba(37,99,235,0.25);
   transition: transform 0.25s ease, box-shadow 0.25s;
@@ -173,20 +209,20 @@ a {
 
 .btn-secondary {
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid var(--border-soft);
   border-radius: 12px;
   padding: 10px 20px;
   font-weight: 600;
   font-size: 0.95rem;
-  color: #EAF0F8;
+  color: var(--text-color);
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
   white-space: nowrap;
 }
 
 .btn-secondary:hover {
-  background: rgba(255,255,255,0.05);
-  border-color: rgba(255,255,255,0.25);
+  background: color-mix(in srgb, var(--card-bg) 80%, transparent);
+  border-color: var(--border-soft);
 }
 
 .btn-large {
@@ -200,7 +236,7 @@ a {
   border: none;
   font-size: 2rem;
   line-height: 1;
-  color: #94A3B8;
+  color: var(--muted-text);
   cursor: pointer;
 }
 
@@ -211,8 +247,8 @@ a {
   right: -100%;
   width: 280px;
   height: 100vh;
-  background: #0E1628;
-  border-left: 1px solid rgba(255,255,255,0.05);
+  background: var(--card-bg);
+  border-left: 1px solid var(--border-soft);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   z-index: 1001;
@@ -234,7 +270,7 @@ a {
   background: transparent;
   border: none;
   font-size: 1.8rem;
-  color: #94A3B8;
+  color: var(--muted-text);
   cursor: pointer;
 }
 
@@ -249,7 +285,7 @@ a {
 .mobile-menu a {
   font-size: 1.2rem;
   font-weight: 500;
-  color: #EAF0F8;
+  color: var(--text-color);
 }
 
 .mobile-connect {
@@ -272,14 +308,14 @@ a {
   font-size: clamp(2.8rem, 5vw, 4rem);
   line-height: 1.1;
   letter-spacing: -1px;
-  color: #EAF0F8;
+  color: var(--text-color);
   max-width: 900px;
   margin: 0 auto;
 }
 
 .hero-section .subheadline {
   font-size: 1.2rem;
-  color: #94A3B8;
+  color: var(--muted-text);
   max-width: 680px;
   margin: 20px auto 0;
 }
@@ -301,7 +337,7 @@ a {
   font-size: 2.2rem;
   text-align: center;
   margin-bottom: 60px;
-  color: #EAF0F8;
+  color: var(--text-color);
 }
 
 .card-grid {
@@ -311,12 +347,12 @@ a {
 }
 
 .feature-card {
-  background: #16223A;
-  border: 1px solid rgba(255,255,255,0.06);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s;
+  background: var(--card-bg);
+  border: 1px solid var(--border-soft);
   border-radius: 16px;
   padding: 28px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.45);
-  transition: transform 0.3s ease, box-shadow 0.3s;
+  box-shadow: 0 20px 50px var(--shadow-strong);
 }
 
 .feature-card:hover {
@@ -327,11 +363,11 @@ a {
 .feature-card h3 {
   font-size: 1.4rem;
   margin-bottom: 12px;
-  color: #EAF0F8;
+  color: var(--text-color);
 }
 
 .feature-card p {
-  color: #94A3B8;
+  color: var(--muted-text);
   line-height: 1.6;
 }
 
@@ -348,13 +384,12 @@ a {
 }
 
 .stat-card {
-  background: #111C32;
-  border: 1px solid rgba(255,255,255,0.05);
+  background: var(--panel-bg);
+  border: 1px solid var(--border-soft);
   border-radius: 16px;
   padding: 30px 20px;
   text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s;
+  box-shadow: 0 20px 50px var(--shadow-strong);
 }
 
 .stat-card:hover {
@@ -367,7 +402,7 @@ a {
   text-transform: uppercase;
   font-size: 0.8rem;
   letter-spacing: 1px;
-  color: #94A3B8;
+  color: var(--muted-text);
   margin-bottom: 10px;
 }
 
@@ -375,7 +410,7 @@ a {
   display: block;
   font-size: 2.8rem;
   font-weight: 700;
-  color: #3B82F6;
+  color: var(--accent-color);
   line-height: 1.2;
 }
 
@@ -392,24 +427,24 @@ a {
 .borrow-section h2 {
   text-align: center;
   font-size: 2.2rem;
-  color: #EAF0F8;
+  color: var(--text-color);
 }
 
 .borrow-section .section-description {
   text-align: center;
   max-width: 700px;
   margin: 10px auto 0;
-  color: #94A3B8;
+  color: var(--muted-text);
 }
 
 .form-card {
   max-width: 650px;
   margin: 60px auto 0;
-  background: #16223A;
-  border: 1px solid rgba(255,255,255,0.06);
+  background: var(--card-bg);
+  border: 1px solid var(--border-soft);
   border-radius: 16px;
   padding: 35px;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+  box-shadow: 0 25px 60px var(--shadow-strong);
 }
 
 .form-group {
@@ -420,23 +455,23 @@ a {
   display: block;
   margin-bottom: 8px;
   font-weight: 500;
-  color: #CBD5E0;
+  color: var(--muted-text);
 }
 
 .form-group input {
   width: 100%;
-  background: #0F1A2D;
-  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--input-bg);
+  border: 1px solid var(--border-soft);
   border-radius: 10px;
   padding: 14px 16px;
   font-size: 1rem;
-  color: #EAF0F8;
+  color: var(--text-color);
   transition: border-color 0.2s;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #3B82F6;
+  border-color: var(--accent-color);
 }
 
 #createLoan {
@@ -449,14 +484,14 @@ a {
 .form-footnote {
   margin-top: 20px;
   font-size: 0.85rem;
-  color: #718096;
+  color: var(--soft-text);
   text-align: center;
 }
 
 /* ===== LEND SECTION ===== */
 .lend-section {
   padding: 100px 0;
-  background: rgba(0,0,0,0.2);
+  background: color-mix(in srgb, var(--bg-color) 85%, transparent);
 }
 
 .lend-section h2 {
@@ -469,7 +504,7 @@ a {
   text-align: center;
   max-width: 700px;
   margin: 0 auto 50px;
-  color: #94A3B8;
+  color: var(--muted-text);
 }
 
 .loan-container {
@@ -483,10 +518,10 @@ a {
   grid-column: 1 / -1;
   text-align: center;
   padding: 60px;
-  background: #16223A;
+  background: var(--card-bg);
   border-radius: 16px;
-  color: #94A3B8;
-  border: 1px dashed rgba(255,255,255,0.1);
+  color: var(--muted-text);
+  border: 1px dashed var(--border-soft);
 }
 
 #refreshLoans {
@@ -506,22 +541,22 @@ a {
 }
 
 .chart-placeholder {
-  background: #16223A;
+  background: var(--card-bg);
   border-radius: 24px;
   padding: 100px 20px;
   text-align: center;
-  border: 1px solid rgba(255,255,255,0.06);
-  color: #94A3B8;
+  border: 1px solid var(--border-soft);
+  color: var(--muted-text);
   font-size: 1.2rem;
   margin-bottom: 30px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 20px 40px var(--shadow-strong);
 }
 
 .analytics-description {
   text-align: center;
   max-width: 700px;
   margin: 0 auto;
-  color: #94A3B8;
+  color: var(--muted-text);
 }
 
 /* ===== SETTINGS PANEL ===== */
@@ -531,8 +566,8 @@ a {
   right: -400px;
   width: 320px;
   height: 100vh;
-  background: #111C32;
-  border-left: 1px solid rgba(255,255,255,0.1);
+  background: var(--panel-bg);
+  border-left: 1px solid var(--border-soft);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   z-index: 2000;
@@ -554,17 +589,17 @@ a {
 
 .settings-header h3 {
   font-size: 1.4rem;
-  color: #EAF0F8;
+  color: var(--text-color);
 }
 
 .settings-option {
   width: 100%;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: color-mix(in srgb, var(--card-bg) 80%, transparent);
+  border: 1px solid var(--border-soft);
   border-radius: 12px;
   padding: 14px;
   margin-bottom: 12px;
-  color: #EAF0F8;
+  color: var(--text-color);
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s;
@@ -578,117 +613,23 @@ a {
 /* ===== FOOTER ===== */
 .site-footer {
   padding: 40px 0;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid var(--border-soft);
   text-align: center;
-  color: #718096;
+  color: var(--soft-text);
   font-size: 0.9rem;
 }
 
-/* ===== LIGHT THEME OVERRIDES ===== */
-.light-theme body {
-  background-color: #F9FAFC;
-  color: #1A202C;
+.theme-toggle {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  color: var(--text-color);
 }
 
-.light-theme #animatedBackground {
-  background: 
-    linear-gradient(180deg, #F0F4FA 0%, #E6EDF5 100%),
-    radial-gradient(circle at 15% 20%, rgba(59,130,246,0.08), transparent 60%),
-    radial-gradient(circle at 85% 80%, rgba(37,99,235,0.05), transparent 60%);
-}
-
-.light-theme body::after {
-  box-shadow: inset 0 0 200px rgba(0,0,0,0.08);
-}
-
-.light-theme .navbar {
-  background: rgba(255,255,255,0.75);
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-
-.light-theme .nav-logo a {
-  color: #1A202C; /* base color for Flow part, but gradient still applies */
-  background: linear-gradient(135deg, #2563EB, #1E4BB3);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.light-theme .desktop-menu a {
-  color: #4A5568;
-}
-
-.light-theme .desktop-menu a:hover {
-  color: #1A202C;
-}
-
-.light-theme .icon-btn {
-  color: #4A5568;
-}
-
-.light-theme .icon-btn:hover {
-  color: #1A202C;
-}
-
-.light-theme .btn-secondary {
-  border-color: rgba(0,0,0,0.15);
-  color: #1A202C;
-}
-
-.light-theme .btn-secondary:hover {
-  background: rgba(0,0,0,0.03);
-}
-
-.light-theme .feature-card,
-.light-theme .stat-card,
-.light-theme .form-card,
-.light-theme .chart-placeholder,
-.light-theme .loan-placeholder {
-  background: #FFFFFF;
-  border-color: rgba(0,0,0,0.08);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.04);
-}
-
-.light-theme .feature-card h3,
-.light-theme .stat-value,
-.light-theme .borrow-section h2,
-.light-theme .lend-section h2,
-.light-theme .analytics-section h2 {
-  color: #1A202C;
-}
-
-.light-theme .feature-card p,
-.light-theme .stat-label,
-.light-theme .section-description,
-.light-theme .analytics-description,
-.light-theme .form-footnote {
-  color: #4A5568;
-}
-
-.light-theme input {
-  background: #FFFFFF;
-  border-color: rgba(0,0,0,0.1);
-  color: #1A202C;
-}
-
-.light-theme input:focus {
-  border-color: #2563EB;
-}
-
-.light-theme .settings-panel {
-  background: #FFFFFF;
-  border-left-color: rgba(0,0,0,0.1);
-}
-
-.light-theme .settings-option {
-  background: #F7FAFC;
-  border-color: rgba(0,0,0,0.1);
-  color: #1A202C;
-}
-
-.light-theme .site-footer {
-  border-top-color: rgba(0,0,0,0.05);
-  color: #718096;
+.theme-toggle.rotate {
+  transform: rotate(180deg);
 }
 
 /* ===== RESPONSIVE ===== */
@@ -767,19 +708,13 @@ a {
 .toast {
   padding: 12px 20px;
   border-radius: 12px;
-  background: #16223A;
-  color: #EAF0F8;
-  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-soft);
   box-shadow: 0 10px 25px rgba(0,0,0,0.35);
   transform: translateX(100%);
   opacity: 0;
   pointer-events: auto;
-}
-
-.light-theme .toast {
-  background: #ffffff;
-  color: #1A202C;
-  border: 1px solid rgba(0,0,0,0.08);
 }
 
 .toast-show {
