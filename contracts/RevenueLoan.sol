@@ -1,19 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Pausable.sol";
+import "https://raw.githubusercontent.com/OpenZeppelin/openzeppelin-contracts/v5.0.1/contracts/utils/ReentrancyGuard.sol";
+import "https://raw.githubusercontent.com/OpenZeppelin/openzeppelin-contracts/v5.0.1/contracts/access/Ownable.sol";
+import "https://raw.githubusercontent.com/OpenZeppelin/openzeppelin-contracts/v5.0.1/contracts/utils/Pausable.sol";
 
-/**
- * @title RevenueLoan
- * @author FlowCredit Protocol
- * @notice Revenue-based lending protocol with optional borrower collateral, full pausability,
- *         and reentrancy protection. Implements checks-effects-interactions throughout.
- * @dev Storage layout is intentionally preserved for upgrade compatibility.
- *      All error paths use custom errors for maximum gas efficiency.
- *      OpenZeppelin v5 compatible.
- */
 contract RevenueLoan is ReentrancyGuard, Ownable, Pausable {
 
     // ────────────────────────────────────────────────────────────
@@ -64,7 +55,7 @@ contract RevenueLoan is ReentrancyGuard, Ownable, Pausable {
         uint256 duration;             // Loan duration in seconds after funding
     }
 
-    // ────────────────────────────────────────────────────────────
+    // ────────────────────────────────────────────────────────
     //                      STATE VARIABLES
     // ────────────────────────────────────────────────────────────
 
