@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowCredit · Learn</title>
+  <!-- Google Font Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- main style (same as dApp) -->
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* small adjustments for learn page */
+    .explain-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 768px) {
+      .explain-grid { grid-template-columns: 1fr; }
+    }
+    .section-highlight {
+      background: var(--card-glass-bg);
+      border: 1px solid var(--card-glass-border);
+      border-radius: 24px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--card-shadow);
+    }
+    .bullet-list {
+      list-style: none;
+      padding: 0;
+    }
+    .bullet-list li {
+      margin-bottom: 1rem;
+      padding-left: 1.8rem;
+      position: relative;
+      color: var(--text-secondary);
+    }
+    .bullet-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--accent-primary);
+      font-weight: 600;
+    }
+    .button-group {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- fixed navbar (simplified, no wallet) -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="index.html" aria-label="FlowCredit homepage">FlowCredit</a>
+      </div>
+      <nav class="nav-menu desktop-menu">
+        <ul>
+          <li><a href="#mechanics" data-section="mechanics">Mechanics</a></li>
+          <li><a href="#why-creditcoin" data-section="why-creditcoin">Why Creditcoin</a></li>
+          <li><a href="#security" data-section="security">Security</a></li>
+          <li><a href="#vision" data-section="vision">Vision</a></li>
+          <li><a href="#get-involved" data-section="get-involved">Get Involved</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <a href="index.html" class="btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.875rem;" title="Back to home">← Back</a>
+        <button id="themeToggle" class="icon-btn" title="Switch theme">🌓</button>
+        <button id="mobileMenuToggle" class="hamburger" title="Menu">☰</button>
+      </div>
+    </div>
+    <!-- mobile menu slide-in -->
+    <div id="mobileMenu" class="mobile-menu">
+      <div class="mobile-menu-header">
+        <button id="closeMobileMenu" class="close-btn">✕</button>
+      </div>
+      <ul>
+        <li><a href="#mechanics" data-section="mechanics">Mechanics</a></li>
+        <li><a href="#why-creditcoin" data-section="why-creditcoin">Why Creditcoin</a></li>
+        <li><a href="#security" data-section="security">Security</a></li>
+        <li><a href="#vision" data-section="vision">Vision</a></li>
+        <li><a href="#get-involved" data-section="get-involved">Get Involved</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="mainContent" style="padding-top: 72px;">
+
+    <!-- HERO -->
+    <section class="hero-section" style="padding: 80px 0 40px;">
+      <div class="container">
+        <h1 style="font-size: clamp(2.2rem,5vw,3.2rem);">How FlowCredit Works</h1>
+        <p class="subheadline" style="max-width:800px;">A transparent, on-chain revenue-based lending protocol that aligns incentives between borrowers and lenders through immutable smart contracts on Creditcoin.</p>
+      </div>
+    </section>
+
+    <!-- THE PROBLEM SECTION -->
+    <section class="platform-section" style="padding-top:20px; background: transparent;">
+      <div class="container">
+        <h2 class="section-title">The Problem</h2>
+        <div style="max-width:900px; margin:0 auto;">
+          <p style="color:var(--text-secondary); line-height:1.8; margin-bottom:1.5rem;">Traditional lending markets are built on collateral and equity. Banks demand hard assets—real estate, inventory, or personal guarantees—leaving entrepreneurs and businesses in emerging markets trapped outside the financial system. For those without significant collateral, the only alternative is equity funding, which dilutes ownership and transfers control to investors.</p>
+          
+          <p style="color:var(--text-secondary); line-height:1.8; margin-bottom:1.5rem;">Even when collateral exists, loan approval timelines stretch across weeks or months. Credit decisions rely on opaque scoring systems, geographic biases, and subjective risk assessments. This friction excludes billions of people from accessing capital when they need it most. The emerging markets face an acute capital access gap: entrepreneurs with viable businesses cannot borrow because they lack the right paperwork, location, or relationship.</p>
+          
+          <p style="color:var(--text-secondary); line-height:1.8;">FlowCredit reimagines lending by tying repayment directly to business revenue. Instead of pledging collateral or surrendering equity, borrowers share a percentage of future revenue until a repayment cap is reached. This aligns incentives: lenders succeed only if the borrower succeeds. Speed increases. Barriers drop. Financial inclusion becomes real.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SMART CONTRACT MECHANICS -->
+    <section id="mechanics" class="platform-section" style="padding-top:20px;">
+      <div class="container">
+        <h2 class="section-title">Smart Contract Mechanics</h2>
+        
+        <div style="background: var(--card-glass-bg); border: 1px solid var(--card-glass-border); border-radius: 24px; padding: 2rem; backdrop-filter: blur(12px); box-shadow: var(--card-shadow); margin-bottom: 2rem;">
+          <h3 style="margin-bottom:1rem; color:var(--accent-primary);">Real-World Example</h3>
+          <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:1rem;"><strong>Scenario:</strong> A borrower raises 1,000 USDT, agrees to a 5% revenue share, and sets a repayment cap of 1.3x (130% of principal).</p>
+          <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:1rem;"><strong>Repayment Flow:</strong> Each month, the borrower reports revenue and automatically shares 5% with the lender through the smart contract. Payments accrue until the total reaches 1,300 USDT. Once this cap is reached, the loan is fully repaid and the revenue share stops.</p>
+          <p style="color:var(--text-secondary); line-height:1.7;"><strong>Why It Works:</strong> The borrower's repayment burden scales with their success. During slow months, fewer funds are owed. During growth periods, repayment accelerates naturally. The lender's returns are aligned with borrower prosperity, eliminating the disconnect in traditional debt where lenders profit from borrower distress.</p>
+        </div>
+
+        <div class="explain-grid">
+          <!-- no over‑repayment -->
+          <div class="section-highlight">
+            <h3 style="margin-bottom:1rem; color:var(--accent-primary);">No Over-Repayment</h3>
+            <p style="color:var(--text-secondary); line-height:1.7;">The contract enforces a precise repayment cap: principal plus agreed revenue share. Once cumulative payments reach this cap, the escrow automatically stops accepting further payments. The borrower never pays a dollar more than the immutable loan terms permit—a guarantee written directly into the blockchain.</p>
+          </div>
+          <!-- immutable terms -->
+          <div class="section-highlight">
+            <h3 style="margin-bottom:1rem; color:var(--accent-primary);">Immutable Loan Terms</h3>
+            <p style="color:var(--text-secondary); line-height:1.7;">Loan parameters—amount, revenue share percentage, duration, and repayment cap—are written into the smart contract bytecode at creation. No admin key, no upgrade, no governance backdoor can alter them after funding. These terms are publicly visible on-chain and enforced by the EVM, giving all parties deterministic, tamper-proof guarantees.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Creditcoin -->
+    <section id="why-creditcoin" class="platform-section">
+      <div class="container">
+        <h2 class="section-title">Why Creditcoin</h2>
+        <p style="text-align:center; color:var(--text-secondary); max-width:700px; margin:0 auto 2rem;">Creditcoin is purpose-built for real-world lending infrastructure, making it the ideal foundation for FlowCredit's revenue-based model.</p>
+        <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+          <article class="feature-card">
+            <h3>Real-World Credit Infrastructure</h3>
+            <p>Creditcoin is purpose-built to record and verify real-world credit transactions, bridging traditional finance with decentralized lending.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Emerging Markets First</h3>
+            <p>Designed for cross-border lending in emerging economies, with identity and credit history primitives that serve underbanked entrepreneurs and businesses.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Cross-Chain Interoperability</h3>
+            <p>Native bridges enable FlowCredit to settle on Creditcoin while accepting capital from multiple blockchains, lowering global barriers to entry.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Decentralized Governance</h3>
+            <p>Creditcoin's independent validator set and community governance ensure lending markets remain neutral and free from centralized control.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Scalable & Cost-Efficient</h3>
+            <p>With fast finality and minimal fees, Creditcoin enables high-frequency revenue payments without prohibitive transaction costs.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Privacy & Compliance Ready</h3>
+            <p>Built-in identity and whitelisting primitives support regulatory readiness for institutions entering emerging market lending.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security Model -->
+    <section id="security" class="platform-section" style="background: transparent;">
+      <div class="container">
+        <h2 class="section-title">Security Model</h2>
+        <p style="text-align:center; color:var(--text-secondary); max-width:700px; margin:0 auto 2rem;">FlowCredit prioritizes transparency, immutability, and non-custodial design to protect borrowers and lenders alike.</p>
+        <div class="card-grid" style="grid-template-columns:repeat(3,1fr);">
+          <article class="feature-card">
+            <h3>Non-Custodial Design</h3>
+            <p>Funds are held and enforced by the smart contract escrow, not by a centralized intermediary.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Audited Smart Contracts</h3>
+            <p>Every loan is secured by deterministic escrow logic deployed on-chain.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Immutable Terms</h3>
+            <p>Loan parameters are frozen at creation—no governance backdoors, no parameter changes, no discretionary modifications after funding.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Public Verifiability</h3>
+            <p>All loan activity is recorded on-chain. Any party can independently verify balances, payment history, and contract behavior.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Deterministic Execution</h3>
+            <p>Repayments and distributions are triggered by transparent, time-based mechanisms and verifiable revenue reports, leaving zero room for discretion.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Transparent Revenue Oracles</h3>
+            <p>Revenue data feeds are decentralized and publicly auditable, ensuring lenders and borrowers trust the same source of truth.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Future Vision -->
+    <section id="vision" class="platform-section">
+      <div class="container">
+        <h2 class="section-title">Future Vision</h2>
+        <p style="text-align:center; color:var(--text-secondary); max-width:700px; margin:0 auto 2rem;">FlowCredit is evolving into a comprehensive, decentralized lending ecosystem.</p>
+        <div style="max-width:900px; margin:0 auto;">
+          <ul class="bullet-list">
+            <li><strong>Decentralized Credit Profiles</strong> — On-chain reputation and historical repayment data enabling underwriting without intermediaries.</li>
+            <li><strong>Real-Time Revenue Oracles</strong> — Trusted, automated data feeds (APIs, stablecoin flows, blockchain transactions) verifying business revenue instantly.</li>
+            <li><strong>Cross-Border Capital Flows</strong> — Frictionless lending between high-yield markets and capital-starved emerging economies with single transactions.</li>
+            <li><strong>Institutional-Grade Liquidity</strong> — Compliance-aware pools and structured products meeting institutional and regulatory standards.</li>
+            <li><strong>Native Business Integration</strong> — Direct connectors to accounting software, payment gateways, and e-commerce platforms for automated revenue sharing.</li>
+            <li><strong>Multi-Currency Settlement</strong> — Support for stablecoins and local currencies, enabling true financial inclusion across geographic boundaries.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Get Involved -->
+    <section id="get-involved" class="platform-section" style="padding-bottom:120px;">
+      <div class="container">
+        <h2 class="section-title">Get Involved</h2>
+        <p style="text-align:center; color:var(--text-secondary); max-width:600px; margin:0 auto 1.5rem;">Join the conversation, ask questions, or start building with FlowCredit. Connect with the team through any channel below.</p>
+        <div class="button-group">
+          <a href="mailto:ejfxprotrade@gmail.com" target="_blank" rel="noopener noreferrer" class="btn-primary">Email</a>
+          <a href="https://t.me/ejag78X" target="_blank" rel="noopener noreferrer" class="btn-primary">Telegram</a>
+          <a href="https://twitter.com/EJDevX" target="_blank" rel="noopener noreferrer" class="btn-primary">Twitter</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <p>FlowCredit — permissionless revenue‑based lending on Creditcoin</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- minimal inline script for theme toggle + mobile menu (no external deps) -->
+  <script>
+    (function() {
+      'use strict';
+
+      // theme
+      const themeToggle = document.getElementById('themeToggle');
+      const root = document.documentElement;
+      const storedTheme = localStorage.getItem('flow_theme') || 'dark';
+      root.setAttribute('data-theme', storedTheme);
+      updateThemeIcon(storedTheme);
+
+      function updateThemeIcon(theme) {
+        if (themeToggle) themeToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+      }
+
+      if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+          const current = root.getAttribute('data-theme') || 'dark';
+          const next = current === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', next);
+          localStorage.setItem('flow_theme', next);
+          updateThemeIcon(next);
+          // subtle animation
+          themeToggle.classList.add('rotate-icon');
+          setTimeout(() => themeToggle.classList.remove('rotate-icon'), 400);
+        });
+      }
+
+      // mobile menu
+      const mobileMenu = document.getElementById('mobileMenu');
+      const openBtn = document.getElementById('mobileMenuToggle');
+      const closeBtn = document.getElementById('closeMobileMenu');
+
+      if (openBtn && mobileMenu) {
+        openBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+      }
+      if (closeBtn && mobileMenu) {
+        closeBtn.addEventListener('click', () => mobileMenu.classList.remove('open'));
+      }
+
+      // close on outside click / escape
+      document.addEventListener('click', function(e) {
+        if (mobileMenu && mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && e.target !== openBtn) {
+          mobileMenu.classList.remove('open');
+        }
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenu) mobileMenu.classList.remove('open');
+      });
+
+      // smooth scroll for nav links (data-section)
+      document.querySelectorAll('[data-section]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href').substring(1);
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (mobileMenu) mobileMenu.classList.remove('open');
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
